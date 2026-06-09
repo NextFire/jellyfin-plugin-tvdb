@@ -50,6 +50,13 @@
                         <input is="emby-checkbox" type="checkbox" id="fallbackToOriginalLanguage" />
                         <span>Fallback to Original Language (Last resort if other fallback languages fails)</span>
                     </label>
+                    <div class="inputContainer">
+                        <label for="imageLanguageOverride">Image Language Override:</label>
+                        <input type="text" id="imageLanguageOverride" is="emby-input" />
+                        <div class="fieldDescription">
+                            If set, all images will be fetched in this language (e.g., en, fr, de, ja). Leave empty to use each library's language preference.
+                        </div>
+                    </div>
                     <label class="checkboxContainer">
                         <input is="emby-checkbox" type="checkbox" id="includeOriginalCountryInTags" />
                         <span>Include original country of the movie or series in tags.</span>
@@ -118,6 +125,7 @@
                     document.getElementById('fallbackLanguages').value = config.FallbackLanguages;
                     document.getElementById('importSeasonName').checked = config.ImportSeasonName
                     document.getElementById('fallbackToOriginalLanguage').checked = config.FallbackToOriginalLanguage;
+                    document.getElementById('imageLanguageOverride').value = config.ImageLanguageOverride;
                     document.getElementById('includeOriginalCountryInTags').checked = config.IncludeOriginalCountryInTags;
                   
                     // Missing Episode Provider Settings
@@ -145,6 +153,7 @@
                     config.FallbackLanguages = document.getElementById('fallbackLanguages').value;
                     config.ImportSeasonName = document.getElementById('importSeasonName').checked;
                     config.FallbackToOriginalLanguage = document.getElementById('fallbackToOriginalLanguage').checked;
+                    config.ImageLanguageOverride = document.getElementById('imageLanguageOverride').value;
                     config.IncludeOriginalCountryInTags = document.getElementById('includeOriginalCountryInTags').checked;
                   
                     // Missing Episode Provider Settings

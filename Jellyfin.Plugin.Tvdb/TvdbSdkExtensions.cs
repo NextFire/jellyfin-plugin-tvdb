@@ -4,6 +4,7 @@ using System.Linq;
 
 using Jellyfin.Extensions;
 
+using MediaBrowser.Controller.Entities;
 using MediaBrowser.Model.Dto;
 using MediaBrowser.Model.Entities;
 using MediaBrowser.Model.Providers;
@@ -240,5 +241,21 @@ public static class TvdbSdkExtensions
             ProviderName = providerName,
             ThumbnailUrl = thumbnailUrl
         };
+    }
+
+    /// <summary>
+    /// Gets the effective language for images, taking into account the plugin-level override.
+    /// If ImageLanguageOverride is set, returns it. Otherwise, falls back to the item's preferred metadata language.
+    /// </summary>
+    /// <param name="item">The item to get the language for.</param>
+    /// <returns>The effective language code for images, or <see langword="null"/> if no preference is available.</returns>
+    public static string GetPreferredImageLanguage(this BaseItem item)
+    {
+        if (TvdbPlugin.Instance?.Configuration is { } config && !string.IsNullOrWhiteSpace(config.ImageLanguageOverride))
+        {
+            return config.ImageLanguageOverride;
+        }
+
+        return item.GetPreferredMetadataLanguage();
     }
 }

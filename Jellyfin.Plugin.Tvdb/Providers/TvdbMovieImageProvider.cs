@@ -96,7 +96,7 @@ namespace Jellyfin.Plugin.Tvdb.Providers
                 remoteImages.AddIfNotNull(artwork.CreateImageInfo(Name, imageType, artworkLanguage));
             }
 
-            return remoteImages.OrderByLanguageDescending(item.GetPreferredMetadataLanguage());
+            return remoteImages.FilterByLanguage(item.GetPreferredImageLanguage());
         }
 
         private async Task<IReadOnlyList<ArtworkBaseRecord>> GetMovieArtworks(int movieTvdbId, CancellationToken cancellationToken)

@@ -104,5 +104,11 @@ namespace Jellyfin.Plugin.Tvdb.Configuration
         /// Gets or sets a value indicating whether to update person for the Check for Metadata Updates Scheduled Task.
         /// </summary>
         public bool UpdatePersonScheduledTask { get; set; } = false;
+
+        /// <summary>
+        /// Gets or sets the language override for all images (e.g., "en", "fr", "de").
+        /// Leave empty to use each library's language preference.
+        /// </summary>
+        public string ImageLanguageOverride { get; set; } = string.Empty;
     }
 }

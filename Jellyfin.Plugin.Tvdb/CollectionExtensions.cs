@@ -57,4 +57,20 @@ internal static class CollectionExtensions
             return 1;
         });
     }
+
+    internal static IEnumerable<RemoteImageInfo> FilterByLanguage(this IEnumerable<RemoteImageInfo> remoteImageInfos, string requestedLanguage)
+    {
+        if (string.IsNullOrWhiteSpace(requestedLanguage))
+        {
+            // Default to English if no requested language is specified.
+            requestedLanguage = "en";
+        }
+
+        var all = remoteImageInfos.ToArray();
+        var byLanguage = all.Where(i => string.Equals(a: i.Language, requestedLanguage, StringComparison.OrdinalIgnoreCase));
+        var noLanguage = all.Where(i => string.IsNullOrEmpty(i.Language));
+        var enLanguage = all.Where(i => string.Equals(i.Language, "en", StringComparison.OrdinalIgnoreCase));
+
+        return byLanguage.Any() ? byLanguage : noLanguage.Any() ? noLanguage : enLanguage.Any() ? enLanguage : all;
+    }
 }

@@ -109,7 +109,7 @@ public class TvdbSeasonImageProvider : IRemoteImageProvider
             remoteImages.AddIfNotNull(artwork.CreateImageInfo(Name, imageType, artworkLanguage));
         }
 
-        return remoteImages.OrderByLanguageDescending(item.GetPreferredMetadataLanguage());
+        return remoteImages.FilterByLanguage(item.GetPreferredImageLanguage());
     }
 
     private async Task<IReadOnlyList<ArtworkBaseRecord>> GetSeasonArtworks(int seriesTvdbId, int seasonNumber, string displayOrder, CancellationToken cancellationToken)
